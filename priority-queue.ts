@@ -25,7 +25,7 @@ class PQueueItem {
 class PriorityQueue {
   private values: PQueueItem[] = [];
 
-  swap(i1: number, i2: number) {
+  private swap(i1: number, i2: number) {
     [this.values[i1], this.values[i2]] = [this.values[i2], this.values[i1]];
     return this.values;
   }
@@ -36,7 +36,7 @@ class PriorityQueue {
 
   enqueue(value: PQueueItem) {
     this.values.push(value);
-    let index = this.values.length - 1;
+    let index = this.length - 1;
     const parentIndex = this.parent(index);
 
     while (index !== 0 && this.values[index].priority > this.values[parentIndex].priority) {
@@ -46,7 +46,7 @@ class PriorityQueue {
   }
 
   dequeue() {
-    this.swap(0, this.values.length - 1);
+    this.swap(0, this.length - 1);
 
     let poppedNode = this.values.pop();
 
@@ -60,11 +60,11 @@ class PriorityQueue {
     let right = this.right(index);
     let smallest = index;
 
-    if (left < this.values.length && this.values[smallest].priority < this.values[left].priority) {
+    if (left < this.length && this.values[smallest].priority < this.values[left].priority) {
       smallest = left;
     }
 
-    if (right < this.values.length && this.values[smallest].priority < this.values[right].priority) {
+    if (right < this.length && this.values[smallest].priority < this.values[right].priority) {
       smallest = right;
     }
 
